@@ -1,0 +1,26 @@
+<section class="error-shell">
+  <article class="error-focus-card" [class]="'error-focus-card-' + error.severity">
+    <div class="error-head">
+      <span class="error-icon">
+        <i [class]="error.icon"></i>
+      </span>
+      <div class="error-head-main">
+        <p class="error-domain">Noyau transversal</p>
+        <h1>{{ error.title }}</h1>
+      </div>
+    </div>
+
+    <div class="error-identifiers">
+      @if (error.httpCode) {
+        <span class="error-chip">HTTP {{ error.httpCode }}</span>
+      }
+      <span class="error-chip">slug: {{ error.slug }}</span>
+    </div>
+
+    <p class="error-description">{{ error.description }}</p>
+
+    <div class="error-actions">
+      <a pButton routerLink="/dashboard" icon="pi pi-home" label="Retour dashboard"></a>
+    </div>
+  </article>
+</section>

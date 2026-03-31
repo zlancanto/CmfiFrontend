@@ -12,7 +12,46 @@ const placeholderPages = [
   { path: 'table', title: 'Table' }
 ] as const;
 
+const coreTransversalErrorSlugs = [
+  'bad-request',
+  'unauthenticated',
+  'forbidden',
+  'not-found',
+  'conflict',
+  'gone',
+  'validation-error',
+  'locked',
+  'rate-limited',
+  'legal-restriction',
+  'internal-error',
+  'bad-gateway',
+  'service-unavailable',
+  'gateway-timeout',
+  'offline',
+  'unsupported-browser',
+  'feature-disabled'
+] as const;
+
 export const routes: Routes = [
+  {
+    path: 'error',
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'internal-error'
+      },
+      ...coreTransversalErrorSlugs.map((slug) => ({
+        path: slug,
+        loadComponent: () => import('./pages/error/error-page').then((m) => m.ErrorPage),
+        data: { slug }
+      })),
+      {
+        path: '**',
+        redirectTo: 'not-found'
+      }
+    ]
+  },
   {
     path: '',
     loadComponent: () => import('./layout/app-layout').then((m) => m.AppLayout),
@@ -37,6 +76,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: ''
+    redirectTo: 'error/not-found'
   }
 ];

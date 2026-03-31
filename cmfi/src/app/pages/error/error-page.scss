@@ -1,0 +1,88 @@
+:host {
+  display: block;
+  min-height: 100dvh;
+  background: var(--app-layout-bg);
+  color: var(--app-text-color);
+}
+
+.error-shell {
+  width: min(48rem, 100%);
+  margin: 0 auto;
+  padding: 3.5rem 1rem 2rem;
+}
+
+.error-focus-card {
+  border: 1px solid var(--app-card-border);
+  border-radius: 0.9rem;
+  background: var(--app-card-bg);
+  padding: 1.25rem;
+}
+
+.error-head {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.error-icon {
+  height: 2.4rem;
+  width: 2.4rem;
+  display: grid;
+  place-items: center;
+  border-radius: 0.65rem;
+  font-size: 1.15rem;
+  background: color-mix(in srgb, var(--app-text-color) 12%, transparent);
+}
+
+.error-focus-card-danger .error-icon {
+  color: #f87171;
+}
+
+.error-focus-card-warn .error-icon {
+  color: #fbbf24;
+}
+
+.error-focus-card-info .error-icon {
+  color: #38bdf8;
+}
+
+.error-domain {
+  margin: 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--app-muted-color);
+}
+
+h1 {
+  margin: 0.2rem 0 0;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.error-identifiers {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.error-chip {
+  border: 1px solid var(--app-card-border);
+  border-radius: 999px;
+  padding: 0.22rem 0.55rem;
+  font-size: 0.77rem;
+  color: var(--app-muted-color);
+}
+
+.error-description {
+  margin: 0.9rem 0 0;
+  color: var(--app-muted-color);
+}
+
+.error-actions {
+  margin-top: 1.15rem;
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}

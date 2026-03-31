@@ -56,21 +56,18 @@ export class AppLayout {
 
   private readonly document = inject(DOCUMENT);
   private readonly window = this.document.defaultView;
-  private readonly themeStorageKey = 'cmfi.theme';
 
   constructor() {
     const isDesktop = this.window?.matchMedia?.('(min-width: 1081px)').matches ?? true;
     this.sidebarOpen.set(isDesktop);
 
-    this.isDark.set(true);
+    const systemPrefersDark =
+      this.window?.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false;
+    this.isDark.set(systemPrefersDark);
 
     effect(() => {
       const darkEnabled = this.isDark();
       this.document.documentElement.classList.toggle('app-dark', darkEnabled);
-      this.window?.localStorage.setItem(
-        this.themeStorageKey,
-        darkEnabled ? 'dark' : 'light'
-      );
     });
   }
 
