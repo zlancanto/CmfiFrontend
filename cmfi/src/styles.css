@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
+@import 'tailwindcss';
+@import 'primeicons/primeicons.css';
+@plugin "tailwindcss-primeui";
+
+@custom-variant dark (&:where(.app-dark, .app-dark *));
+
+:root {
+  --app-topbar-height: 5rem;
+  --app-sidebar-width: 21rem;
+  --app-shell-gap: 1.45rem;
+
+  --app-layout-bg: #f4f6fb;
+  --app-sidebar-bg: #eff2f7;
+  --app-pattern-color: #dce1ea;
+  --app-border-color: #d7deea;
+  --app-text-color: #1f3258;
+  --app-muted-color: #637391;
+  --app-header-text: #5b7198;
+  --app-logo-accent: #5b5f96;
+
+  --app-nav-hover-bg: rgba(70, 84, 125, 0.09);
+  --app-nav-active-bg: rgba(70, 84, 125, 0.08);
+  --app-accent-pink: #ec4f9e;
+
+  --app-card-bg: #ffffff;
+  --app-card-border: #d6deeb;
+  --app-today-bg: #60759d;
+  --app-today-border: #7f92b8;
+  --app-today-text: #ffffff;
+}
+
+.app-dark {
+  --app-layout-bg: #05070f;
+  --app-sidebar-bg: #03060e;
+  --app-pattern-color: #111a2f;
+  --app-border-color: #21283c;
+  --app-text-color: #f5f7fe;
+  --app-muted-color: #96a3c2;
+  --app-header-text: #d4dcf0;
+  --app-logo-accent: #f8fbff;
+
+  --app-nav-hover-bg: rgba(143, 162, 217, 0.12);
+  --app-nav-active-bg: rgba(143, 162, 217, 0.12);
+  --app-accent-pink: #ff55ac;
+
+  --app-card-bg: #131723;
+  --app-card-border: #252d43;
+  --app-today-bg: #4b5f85;
+  --app-today-border: #6d7fa2;
+  --app-today-text: #f7faff;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: 'Lato', 'Segoe UI', sans-serif;
+  background: var(--app-layout-bg);
+  color: var(--app-text-color);
+}
+
+a {
+  color: inherit;
+}

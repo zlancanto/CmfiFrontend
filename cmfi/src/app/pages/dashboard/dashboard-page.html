@@ -1,0 +1,72 @@
+<section class="dashboard-kpi-grid">
+  @for (metric of metrics; track metric.label) {
+    <article [class]="'kpi-card kpi-card-' + metric.tone">
+      <div class="kpi-title">{{ metric.label }}</div>
+
+      <div class="kpi-values">
+        <span class="kpi-badge">
+          <i class="pi" [class]="metric.trendIcon"></i>
+          {{ metric.delta }}
+        </span>
+        <span class="kpi-number">{{ metric.value }}</span>
+      </div>
+
+      <div class="kpi-sparkline"></div>
+    </article>
+  }
+</section>
+
+<section class="dashboard-analytics-card">
+  <div class="analytics-head">
+    <h2>Unique Visitor Graph</h2>
+    <button type="button" class="year-selector">
+      2025
+      <i class="pi pi-angle-down"></i>
+    </button>
+  </div>
+
+  <div class="analytics-stats-grid">
+    <article>
+      <div class="analytics-value">$620,076</div>
+      <div class="analytics-label">MRR GROWTH</div>
+      <p>
+        Measure how fast you're growing mothly recurring revenue.
+        <a href="#">Learn more</a>
+      </p>
+    </article>
+
+    <article>
+      <div class="analytics-value">$1,120</div>
+      <div class="analytics-label">AVG. MRR/CUSTOMER</div>
+      <p>
+        The revenue generated per account on a monthly or yearly basis.
+        <a href="#">Learn more</a>
+      </p>
+    </article>
+  </div>
+
+  <div class="analytics-chart">
+    <div class="analytics-chart-head">
+      <h3>Revenue</h3>
+      <div class="analytics-legend">
+        <span><i class="legend-box plan"></i>Plan</span>
+        <span><i class="legend-box actual"></i>Growth actual</span>
+      </div>
+    </div>
+
+    <div class="chart-bars" aria-hidden="true">
+      <span style="--bar-height: 7.7rem"></span>
+      <span style="--bar-height: 8.4rem"></span>
+      <span style="--bar-height: 9rem"></span>
+      <span style="--bar-height: 8.1rem"></span>
+      <span style="--bar-height: 9.4rem"></span>
+      <span style="--bar-height: 8.9rem"></span>
+      <span style="--bar-height: 10.2rem"></span>
+      <span style="--bar-height: 9.6rem"></span>
+      <span style="--bar-height: 11rem"></span>
+      <span style="--bar-height: 10.5rem"></span>
+      <span style="--bar-height: 10.9rem"></span>
+      <span style="--bar-height: 11.5rem"></span>
+    </div>
+  </div>
+</section>

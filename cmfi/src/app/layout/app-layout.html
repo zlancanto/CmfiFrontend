@@ -1,0 +1,80 @@
+<div class="app-layout" [class.app-layout-sidebar-open]="sidebarOpen()">
+  <aside class="app-sidebar">
+    <div class="app-logo">
+      <span class="app-logo-symbol">
+        <i class="pi pi-shield"></i>
+      </span>
+      <span class="app-logo-text">Atlantis</span>
+    </div>
+
+    <div class="app-sidebar-scroll">
+      @for (section of sections; track section.title) {
+        <section class="app-menu-section">
+          <div class="app-menu-title">{{ section.title }}</div>
+          <nav class="app-nav">
+            @for (item of section.items; track item.route) {
+              <a
+                class="app-nav-link"
+                [routerLink]="item.route"
+                routerLinkActive="app-nav-link-active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="closeSidebar()"
+              >
+                <span class="app-nav-link-main">
+                  <i [class]="item.icon"></i>
+                  <span>{{ item.label }}</span>
+                </span>
+                @if (item.showChevron) {
+                  <i class="pi pi-angle-down"></i>
+                }
+              </a>
+            }
+          </nav>
+        </section>
+      }
+    </div>
+  </aside>
+
+  <header class="app-topbar">
+    <div class="app-topbar-start">
+      <button
+        type="button"
+        class="app-icon-btn"
+        aria-label="Toggle navigation"
+        (click)="toggleSidebar()"
+      >
+        <i [class]="sidebarOpen() ? 'pi pi-times' : 'pi pi-bars'"></i>
+      </button>
+      <h1 class="app-page-title">{{ pageTitle }}</h1>
+    </div>
+
+    <div class="app-topbar-end">
+      @for (icon of topbarIcons; track icon) {
+        <button type="button" class="app-icon-btn">
+          <i [class]="icon"></i>
+        </button>
+      }
+
+      <button type="button" class="app-icon-btn" (click)="toggleTheme()">
+        <i [class]="isDark() ? 'pi pi-sun' : 'pi pi-moon'"></i>
+      </button>
+
+      <div class="app-avatar">M</div>
+
+      <button type="button" class="app-today-btn">
+        <i class="pi pi-bookmark"></i>
+        <span>Today</span>
+      </button>
+    </div>
+  </header>
+
+  <div
+    class="app-sidebar-mask"
+    [class.app-sidebar-mask-visible]="sidebarOpen()"
+    (click)="closeSidebar()"
+  ></div>
+
+  <main class="app-content">
+    <router-outlet />
+  </main>
+</div>
