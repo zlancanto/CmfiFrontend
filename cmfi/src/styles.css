@@ -12,6 +12,7 @@
 
   --app-layout-bg: #f4f6fb;
   --app-sidebar-bg: #eff2f7;
+  --app-sidebar-bg-top: #f6f8fc;
   --app-pattern-color: #dce1ea;
   --app-border-color: #d7deea;
   --app-text-color: #1f3258;
@@ -31,21 +32,22 @@
 }
 
 .app-dark {
-  --app-layout-bg: #05070f;
-  --app-sidebar-bg: #03060e;
-  --app-pattern-color: #111a2f;
-  --app-border-color: #21283c;
-  --app-text-color: #f5f7fe;
-  --app-muted-color: #96a3c2;
-  --app-header-text: #d4dcf0;
+  --app-layout-bg: var(--p-surface-950);
+  --app-sidebar-bg: #020203;
+  --app-sidebar-bg-top: #101116;
+  --app-pattern-color: #1a1b21;
+  --app-border-color: var(--p-content-border-color);
+  --app-text-color: var(--p-text-color);
+  --app-muted-color: var(--p-text-muted-color);
+  --app-header-text: var(--p-text-color);
   --app-logo-accent: #f8fbff;
 
   --app-nav-hover-bg: rgba(143, 162, 217, 0.12);
   --app-nav-active-bg: rgba(143, 162, 217, 0.12);
   --app-accent-pink: #ff55ac;
 
-  --app-card-bg: #131723;
-  --app-card-border: #252d43;
+  --app-card-bg: var(--p-content-background);
+  --app-card-border: var(--p-content-border-color);
   --app-today-bg: #4b5f85;
   --app-today-border: #6d7fa2;
   --app-today-text: #f7faff;

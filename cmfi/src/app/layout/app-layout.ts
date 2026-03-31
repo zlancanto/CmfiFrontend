@@ -59,11 +59,10 @@ export class AppLayout {
   private readonly themeStorageKey = 'cmfi.theme';
 
   constructor() {
-    const storedTheme = this.window?.localStorage.getItem(this.themeStorageKey);
-    const prefersDark =
-      this.window?.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false;
+    const isDesktop = this.window?.matchMedia?.('(min-width: 1081px)').matches ?? true;
+    this.sidebarOpen.set(isDesktop);
 
-    this.isDark.set(storedTheme ? storedTheme === 'dark' : prefersDark);
+    this.isDark.set(true);
 
     effect(() => {
       const darkEnabled = this.isDark();
@@ -80,10 +79,16 @@ export class AppLayout {
   }
 
   protected closeSidebar(): void {
-    this.sidebarOpen.set(false);
+    if (!this.isDesktopViewport()) {
+      this.sidebarOpen.set(false);
+    }
   }
 
   protected toggleTheme(): void {
     this.isDark.update((value) => !value);
+  }
+
+  private isDesktopViewport(): boolean {
+    return (this.window?.innerWidth ?? 1920) > 1080;
   }
 }
