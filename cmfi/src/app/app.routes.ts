@@ -34,6 +34,21 @@ const coreTransversalErrorSlugs = [
 
 export const routes: Routes = [
   {
+    path: 'auth',
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'register'
+      },
+      {
+        path: 'register',
+        loadComponent: () =>
+          import('./pages/auth/register/register-page').then((m) => m.RegisterPage)
+      }
+    ]
+  },
+  {
     path: 'error',
     children: [
       {
