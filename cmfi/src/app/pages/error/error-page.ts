@@ -2,9 +2,13 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import {
-  CORE_TRANSVERSAL_ERRORS_BY_SLUG,
-  CoreTransversalErrorDefinition,
+  APP_ROUTE_PATHS,
+  APP_ROUTE_URLS,
   CoreTransversalErrorSlug
+} from '@core/routing/app-route.constants';
+import {
+  CORE_TRANSVERSAL_ERRORS_BY_SLUG,
+  CoreTransversalErrorDefinition
 } from './core-transversal-errors';
 
 @Component({
@@ -16,6 +20,7 @@ import {
 export class ErrorPage {
   private readonly route = inject(ActivatedRoute);
 
+  protected readonly dashboardUrl = APP_ROUTE_URLS.dashboard;
   protected readonly error = this.resolveError();
 
   private resolveError(): CoreTransversalErrorDefinition {
@@ -25,6 +30,6 @@ export class ErrorPage {
       return CORE_TRANSVERSAL_ERRORS_BY_SLUG[routeSlug];
     }
 
-    return CORE_TRANSVERSAL_ERRORS_BY_SLUG['internal-error'];
+    return CORE_TRANSVERSAL_ERRORS_BY_SLUG[APP_ROUTE_PATHS.error.internalError];
   }
 }

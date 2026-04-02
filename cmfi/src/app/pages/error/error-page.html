@@ -20,7 +20,7 @@
     <p class="error-description">{{ error.description }}</p>
 
     <div class="error-actions">
-      <a pButton routerLink="/dashboard" icon="pi pi-home" label="Retour dashboard"></a>
+      <a pButton [routerLink]="dashboardUrl" icon="pi pi-home" label="Retour dashboard"></a>
     </div>
   </article>
 </section>

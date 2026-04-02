@@ -1,98 +1,171 @@
-<section class="register-shell">
+<section class="register-view">
+  <div class="register-orb register-orb-left"></div>
+  <div class="register-orb register-orb-right"></div>
+  <div class="register-leaf register-leaf-top"></div>
+  <div class="register-leaf register-leaf-bottom"></div>
+  <div class="register-bokeh register-bokeh-a"></div>
+  <div class="register-bokeh register-bokeh-b"></div>
+  <div class="register-bokeh register-bokeh-c"></div>
+  <div class="register-star"></div>
+
   <article class="register-card">
-    <header class="register-head">
-      <p class="register-kicker">API Integration</p>
-      <h1>Route /auth/register</h1>
-      <p class="register-subtitle">
-        Endpoint cible: <code>{{ apiBaseUrl }}/auth/register</code>
-      </p>
+    <header class="register-header">
+      <i class="pi pi-sync register-header-icon"></i>
+      <h1>Créer votre compte</h1>
     </header>
 
     <form class="register-form" [formGroup]="form" (ngSubmit)="submit()">
-      <label class="form-field">
-        <span>Email</span>
-        <input type="email" formControlName="email" placeholder="jane@cmfi.fr" />
+      <label class="glass-field glass-field-primary">
+        <i class="pi pi-envelope field-icon"></i>
+        <span class="field-content">
+          <span class="field-label">
+            Adresse email {{' '}}
+            <span class="required-marker" aria-hidden="true">*</span>
+          </span>
+          <input type="email" formControlName="email" placeholder="votre.email@exemple.com"/>
+        </span>
       </label>
       @if (hasControlError('email')) {
-        <p class="field-error">Adresse email invalide.</p>
+        @if (form.controls.email.hasError('required')) {
+          <p class="field-error">L'adresse email est obligatoire.</p>
+        }
+        @if (form.controls.email.hasError('email')) {
+          <p class="field-error">Adresse email invalide.</p>
+        }
       }
 
-      <label class="form-field">
-        <span>Mot de passe</span>
-        <input type="password" formControlName="password" placeholder="S3cur3Pass!" />
+      <label class="glass-field">
+        <i class="pi pi-user field-icon"></i>
+        <span class="field-content">
+          <span class="field-label">
+            Prénom {{' '}}
+            <span class="required-marker" aria-hidden="true">*</span>
+          </span>
+          <input type="text" formControlName="firstName" placeholder="Jane"/>
+        </span>
+      </label>
+      @if (hasControlError('firstName')) {
+        @if (form.controls.firstName.hasError('required')) {
+          <p class="field-error">Le prénom est obligatoire.</p>
+        }
+        @if (form.controls.firstName.hasError('minlength')) {
+          <p class="field-error">Le prénom doit contenir au moins 2 caractères.</p>
+        }
+      }
+
+      <label class="glass-field">
+        <i class="pi pi-user field-icon"></i>
+        <span class="field-content">
+          <span class="field-label">
+            Nom {{' '}}
+            <span class="required-marker" aria-hidden="true">*</span>
+          </span>
+          <input type="text" formControlName="lastName" placeholder="Doe"/>
+        </span>
+      </label>
+      @if (hasControlError('lastName')) {
+        @if (form.controls.lastName.hasError('required')) {
+          <p class="field-error">Le nom est obligatoire.</p>
+        }
+        @if (form.controls.lastName.hasError('minlength')) {
+          <p class="field-error">Le nom doit contenir au moins 2 caractères.</p>
+        }
+      }
+
+      <label class="glass-field">
+        <i class="pi pi-lock field-icon"></i>
+        <span class="field-content">
+          <span class="field-label">
+            Mot de passe {{' '}}
+            <span class="required-marker" aria-hidden="true">*</span>
+          </span>
+          <input
+            [type]="passwordVisible() ? 'text' : 'password'"
+            formControlName="password"
+            placeholder="Votre mot de passe"
+          />
+        </span>
+        <button
+          type="button"
+          class="field-visibility"
+          [attr.aria-label]="passwordVisible() ? 'Masquer le mot de passe' : 'Afficher le mot de passe'"
+          (click)="togglePasswordVisibility()"
+        >
+          <i [class]="passwordVisible() ? 'pi pi-eye-slash' : 'pi pi-eye'"></i>
+        </button>
       </label>
       @if (hasControlError('password')) {
-        <p class="field-error">Le mot de passe est obligatoire.</p>
+        @if (form.controls.password.hasError('required')) {
+          <p class="field-error">Le mot de passe est obligatoire.</p>
+        }
+        @if (form.controls.password.hasError('pattern')) {
+          <p class="field-error">
+            Le mot de passe doit contenir au moins 12 caractères, une majuscule, une minuscule et un caractère spécial.
+          </p>
+        }
       }
 
-      <div class="form-row">
-        <label class="form-field">
-          <span>Prenom</span>
-          <input type="text" formControlName="firstName" placeholder="Jane" />
-        </label>
-        <label class="form-field">
-          <span>Nom</span>
-          <input type="text" formControlName="lastName" placeholder="Doe" />
-        </label>
-      </div>
-      @if (hasControlError('firstName') || hasControlError('lastName')) {
-        <p class="field-error">Prenom et nom sont obligatoires.</p>
-      }
-
-      <label class="form-field">
-        <span>Role</span>
-        <select formControlName="role">
-          @for (role of roles; track role) {
-            <option [value]="role">{{ role }}</option>
-          }
-        </select>
+      <label class="glass-field">
+        <i class="pi pi-lock field-icon"></i>
+        <span class="field-content">
+          <span class="field-label">
+            Confirmer le mot de passe {{' '}}
+            <span class="required-marker" aria-hidden="true">*</span>
+          </span>
+          <input
+            [type]="confirmPasswordVisible() ? 'text' : 'password'"
+            formControlName="confirmPassword"
+            placeholder="Retapez votre mot de passe"
+          />
+        </span>
+        <button
+          type="button"
+          class="field-visibility"
+          [attr.aria-label]="confirmPasswordVisible() ? 'Masquer le mot de passe' : 'Afficher le mot de passe'"
+          (click)="toggleConfirmPasswordVisibility()"
+        >
+          <i [class]="confirmPasswordVisible() ? 'pi pi-eye-slash' : 'pi pi-eye'"></i>
+        </button>
       </label>
-
-      <div class="form-actions">
-        <button pButton type="submit" [disabled]="loading()" [label]="loading() ? 'Envoi...' : 'Register'"></button>
-        <a pButton severity="secondary" routerLink="/dashboard" label="Retour dashboard"></a>
-      </div>
-    </form>
-  </article>
-
-  @if (successPayload(); as success) {
-    <article class="response-card response-success">
-      <h2>Succes API</h2>
-      <p class="response-main">{{ success.message }}</p>
-      <h3>Payload recu (exact)</h3>
-      <pre>{{ rawSuccessPayload() | json }}</pre>
-    </article>
-  }
-
-  @if (apiError(); as error) {
-    <article class="response-card response-error">
-      <h2>Echec API</h2>
-      <p class="response-main">{{ error.message }}</p>
-
-      <div class="api-error-meta">
-        <span><strong>Status:</strong> {{ error.status }}</span>
-        <span><strong>Error:</strong> {{ error.error }}</span>
-        <span><strong>Code:</strong> {{ error.code }}</span>
-        <span><strong>TraceId:</strong> {{ error.traceId || 'N/A' }}</span>
-        <span><strong>Path:</strong> {{ error.path || 'N/A' }}</span>
-      </div>
-
-      @if (error.fieldErrors.length > 0) {
-        <div class="field-errors-block">
-          <h3>fieldErrors retournes par l'API</h3>
-          <ul>
-            @for (fieldError of error.fieldErrors; track $index) {
-              <li>
-                <strong>{{ fieldError.field }}</strong>: {{ fieldError.message }}
-                <div class="rejected-value">rejectedValue: {{ fieldError.rejectedValue | json }}</div>
-              </li>
-            }
-          </ul>
-        </div>
+      @if (hasControlError('confirmPassword')) {
+        @if (form.controls.confirmPassword.hasError('required')) {
+          <p class="field-error">La confirmation du mot de passe est obligatoire.</p>
+        }
+        @if (form.controls.confirmPassword.hasError('pattern')) {
+          <p class="field-error">
+            La confirmation doit contenir au moins 12 caractères, une majuscule, une minuscule et un caractère spécial.
+          </p>
+        }
+      }
+      @if (hasConfirmPasswordMismatch()) {
+        <p class="field-error">Les mots de passe ne correspondent pas.</p>
       }
 
-      <h3>Payload recu (exact)</h3>
-      <pre>{{ rawErrorPayload() | json }}</pre>
-    </article>
-  }
+      <input type="hidden" formControlName="role"/>
+
+      <button type="submit" class="sign-up-btn" [disabled]="loading()">
+        {{ loading() ? 'INSCRIPTION...' : "S'INSCRIRE" }}
+      </button>
+    </form>
+
+    @if (successPayload(); as success) {
+      <p class="api-feedback api-feedback-success">{{ success.message }}</p>
+    }
+
+    @if (apiError()) {
+      <div class="api-feedback api-feedback-error">
+        <p>Messages precis retournes par l'API :</p>
+        <ul>
+          @for (message of preciseErrorMessages(); track message) {
+            <li>{{ message }}</li>
+          }
+        </ul>
+      </div>
+    }
+
+    <p class="register-footer-text">
+      Vous avez déjà un compte ?
+      <a [routerLink]="dashboardUrl">Se connecter</a>
+    </p>
+  </article>
 </section>

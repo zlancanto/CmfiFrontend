@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, effect, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { APP_ROUTE_URLS } from '@core/routing/app-route.constants';
 
 type SidebarItem = {
   label: string;
@@ -28,25 +29,25 @@ export class AppLayout {
   protected readonly sections: ReadonlyArray<SidebarSection> = [
     {
       title: 'Dashboards',
-      items: [{ label: 'E-Commerce', icon: 'pi pi-home', route: '/dashboard' }]
+      items: [{ label: 'E-Commerce', icon: 'pi pi-home', route: APP_ROUTE_URLS.dashboard }]
     },
     {
       title: 'Apps',
       items: [
-        { label: 'CMS', icon: 'pi pi-comments', route: '/cms', showChevron: true },
-        { label: 'Chat', icon: 'pi pi-comment', route: '/chat' },
-        { label: 'Files', icon: 'pi pi-folder', route: '/files' },
-        { label: 'Mail', icon: 'pi pi-envelope', route: '/mail' },
-        { label: 'Task List', icon: 'pi pi-check-square', route: '/task-list' }
+        { label: 'CMS', icon: 'pi pi-comments', route: APP_ROUTE_URLS.cms, showChevron: true },
+        { label: 'Chat', icon: 'pi pi-comment', route: APP_ROUTE_URLS.chat },
+        { label: 'Files', icon: 'pi pi-folder', route: APP_ROUTE_URLS.files },
+        { label: 'Mail', icon: 'pi pi-envelope', route: APP_ROUTE_URLS.mail },
+        { label: 'Task List', icon: 'pi pi-check-square', route: APP_ROUTE_URLS.taskList }
       ]
     },
     {
       title: 'UI Kit',
       items: [
-        { label: 'Form Layout', icon: 'pi pi-id-card', route: '/form-layout' },
-        { label: 'Input', icon: 'pi pi-pen-to-square', route: '/input' },
-        { label: 'Button', icon: 'pi pi-stop-circle', route: '/button' },
-        { label: 'Table', icon: 'pi pi-table', route: '/table' }
+        { label: 'Form Layout', icon: 'pi pi-id-card', route: APP_ROUTE_URLS.formLayout },
+        { label: 'Input', icon: 'pi pi-pen-to-square', route: APP_ROUTE_URLS.input },
+        { label: 'Button', icon: 'pi pi-stop-circle', route: APP_ROUTE_URLS.button },
+        { label: 'Table', icon: 'pi pi-table', route: APP_ROUTE_URLS.table }
       ]
     }
   ];
